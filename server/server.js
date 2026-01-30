@@ -6,5 +6,4 @@ const app = express();
 
 app.listen(PORT, () => {
     console.log("Server started listening on port", PORT);
-
 })
