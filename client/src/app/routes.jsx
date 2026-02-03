@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/student',
-                element: <DashboardLayout />,
+                element: <DashboardLayout role='student' />,
                 children: [
                     { path: 'dashboard', element: <StudentDashboard /> },
                     { path: '*', element: <NotFound /> }
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/manager',
-                element: <DashboardLayout />,
+                element: <DashboardLayout role='manager' />,
                 children: [
                     { path: 'dashboard', element: <ManagerDashboard /> },
                     { path: '*', element: <NotFound /> }
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/admin',
-                element: <DashboardLayout />,
+                element: <DashboardLayout role='admin' />,
                 children: [
                     { path: 'dashboard', element: <AdminDashboard /> },
                     { path: '*', element: <NotFound /> }

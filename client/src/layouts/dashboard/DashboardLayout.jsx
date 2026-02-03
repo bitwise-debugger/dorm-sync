@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import Sidebar from './Sidebar';
 import { Outlet } from 'react-router-dom';
+import ThemeButton from '../../components/common/ThemeButton';
+import IconButton from '../../components/common/IconButton';
+import { Bell } from 'lucide-react';
+import Avatar from '../../components/common/Avatar';
+import UserMenu from '../../components/common/UserMenu';
 
 const DashboardLayout = ({ children, role = 'student', userName = 'User' }) => {
     useEffect(() => {
@@ -20,21 +25,16 @@ const DashboardLayout = ({ children, role = 'student', userName = 'User' }) => {
             {/* Main Content Area */}
             <div className="flex-1 lg:ml-64 flex flex-col">
                 {/* Topbar */}
-                <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 sticky top-0 z-10 px-6 flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-slate-800 dark:text-white capitalize">
-                        {role} Panel
+                <header className="h-23 bg-slate-50 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 px-6 flex items-center justify-between">
+                    <h2 className="text-lg font-semibold text-slate-800 dark:text-white capitalize flex flex-col justify-start">
+                        <span className='text-xl'>Dashboard</span>
+                        <span className='text-sm text-gray-500'>23 December 2025</span>
                     </h2>
 
-                    <div className="flex items-center gap-4">
-                        <div className="text-right hidden sm:block">
-                            <p className="text-sm font-bold text-slate-800 dark:text-white leading-tight">{userName}</p>
-                            <p className="text-[11px] text-slate-500 dark:text-slate-400 uppercase tracking-wider">{role}</p>
-                        </div>
-                        <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center border border-orange-200 dark:border-orange-500/30 overflow-hidden">
-                            <span className="text-orange-600 dark:text-orange-400 font-bold text-sm">
-                                {userName.substring(0, 2).toUpperCase()}
-                            </span>
-                        </div>
+                    <div className="header-left flex items-center gap-5 ">
+                        <ThemeButton />
+                        < IconButton icon={Bell} badgeCount={3} />
+                        <UserMenu />
                     </div>
                 </header>
 

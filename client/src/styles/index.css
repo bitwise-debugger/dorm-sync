@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
 /* * {
     padding: 0;
     margin: 0;
