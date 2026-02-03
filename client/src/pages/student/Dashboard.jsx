@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Dashboard() {
   return (
-    <div>StudentDashboard</div>
+    <div>Dashboard</div>
   )
 }

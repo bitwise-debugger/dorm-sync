@@ -8,6 +8,7 @@ import Register from '../pages/auth/Register';
 import Login from '../pages/auth/Login';
 
 import NotFound from '../pages/utlility/NotFound';
+import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/student',
+        element: <DashboardLayout />,
         children: [
             { path: 'dashboard', element: <StudentDashboard /> },
             { path: '*', element: <NotFound /> }
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/manager',
+        element: <DashboardLayout />,
         children: [
             { path: 'dashboard', element: <ManagerDashboard /> },
             { path: '*', element: <NotFound /> }
@@ -35,6 +38,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/admin',
+        element: <DashboardLayout />,
         children: [
             { path: 'dashboard', element: <AdminDashboard /> },
             { path: '*', element: <NotFound /> }
