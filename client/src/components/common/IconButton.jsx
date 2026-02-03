@@ -21,9 +21,9 @@ const IconButton = ({
                 dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)]
 
                 /* Interaction: Elevation & Feedback */
-                hover:shadow-xl hover:-translate-y-0.5
+                hover:shadow-xl
                 hover:border-slate-200 dark:hover:border-slate-700
-                active:scale-90 active:translate-y-0
+
                 
                 transition-all duration-300 ease-out 
                 group cursor-pointer outline-none

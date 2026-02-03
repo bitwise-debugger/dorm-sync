@@ -28,8 +28,8 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
                     border border-slate-50 dark:border-slate-800/50
                     shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] 
                     dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)]
-                    hover:shadow-xl hover:-translate-y-0.5
-                    active:scale-95 active:translate-y-0
+                    hover:shadow-xl 
+                
                     transition-all duration-300 ease-out 
                     group cursor-pointer outline-none
 
