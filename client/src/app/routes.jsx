@@ -9,6 +9,7 @@ import Login from '../pages/auth/Login';
 
 import NotFound from '../pages/utlility/NotFound';
 import DashboardLayout from '../layouts/dashboard/DashboardLayout';
+import RequireAuth from '../auth/RequireAuth';
 
 
 const router = createBrowserRouter([
@@ -21,29 +22,36 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/student',
-        element: <DashboardLayout />,
+        path: '/',
+        element: <RequireAuth />,
         children: [
-            { path: 'dashboard', element: <StudentDashboard /> },
-            { path: '*', element: <NotFound /> }
+            {
+                path: '/student',
+                element: <DashboardLayout />,
+                children: [
+                    { path: 'dashboard', element: <StudentDashboard /> },
+                    { path: '*', element: <NotFound /> }
+                ]
+            },
+            {
+                path: '/manager',
+                element: <DashboardLayout />,
+                children: [
+                    { path: 'dashboard', element: <ManagerDashboard /> },
+                    { path: '*', element: <NotFound /> }
+                ]
+            },
+            {
+                path: '/admin',
+                element: <DashboardLayout />,
+                children: [
+                    { path: 'dashboard', element: <AdminDashboard /> },
+                    { path: '*', element: <NotFound /> }
+                ]
+            },
         ]
     },
-    {
-        path: '/manager',
-        element: <DashboardLayout />,
-        children: [
-            { path: 'dashboard', element: <ManagerDashboard /> },
-            { path: '*', element: <NotFound /> }
-        ]
-    },
-    {
-        path: '/admin',
-        element: <DashboardLayout />,
-        children: [
-            { path: 'dashboard', element: <AdminDashboard /> },
-            { path: '*', element: <NotFound /> }
-        ]
-    },
+
     { path: '*', element: <NotFound /> }
 ])
 

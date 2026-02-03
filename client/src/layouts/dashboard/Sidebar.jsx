@@ -75,10 +75,10 @@ const Sidebar = ({ role }) => {
                     <Settings size={20} />
                     <span className="font-medium text-[15px]">Settings</span>
                 </button>
-                <button className="flex items-center gap-3 w-full px-4 py-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-colors">
+                {/* <button className="flex items-center gap-3 w-full px-4 py-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-colors">
                     <LogOut size={20} />
                     <span className="font-medium text-[15px]">Logout</span>
-                </button>
+                </button> */}
             </div>
         </aside>
     );
