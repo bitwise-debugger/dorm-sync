@@ -5,18 +5,30 @@ const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
     const [authLoading, setAuthLoading] = useState(true);
-    const [user, setUser] = useState({ id: 1, name: 'developer', role: 'admin' });
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const localUser = localStorage.getItem('dormsyncuser');
+        if (localUser) return JSON.parse(localUser);
+        else return null;
+    });
 
     useEffect(() => {
         console.log("AuthContextProvider Mounted!!");
-
-        setTimeout(() => {
-            setAuthLoading(false);
-        }, 1000);
     }, []);
+    useEffect(() => {
+        console.log("User State Changed ", user);
+        setAuthLoading(false);
+    }, [user]);
 
-    const value = { user, authLoading };
+
+    function logout() {
+        setAuthLoading(true);
+        setTimeout(() => {
+            localStorage.removeItem('dormsyncuser');
+            localStorage.removeItem('dormsynctoken');
+            setUser(null);
+        }, 500);
+    }
+    const value = { user, authLoading, setUser, setAuthLoading, logout };
     return (
         <AuthContext.Provider value={value} >
             {children}

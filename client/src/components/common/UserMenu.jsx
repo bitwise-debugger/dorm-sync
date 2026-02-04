@@ -2,8 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { User, LogOut, ChevronDown, Settings } from 'lucide-react';
 import Avatar from './Avatar';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../auth/AuthContext';
 
 const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
+    const { logout } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -73,7 +75,7 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
 
                     <div className="h-px bg-slate-100 dark:bg-slate-800 my-1 mx-2" />
 
-                    <button className="flex items-center gap-3 w-full px-4 py-2.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors">
+                    <button onClick={logout} className="flex items-center gap-3 w-full px-4 py-2.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors">
                         <LogOut size={18} strokeWidth={1.5} />
                         <span className="text-sm font-bold">Logout</span>
                     </button>

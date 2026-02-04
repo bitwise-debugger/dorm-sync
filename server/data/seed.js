@@ -29,7 +29,7 @@ const seedDatabase = async () => {
                 if (rollNo && studentName) {
                     students.push({
                         name: studentName.trim(),
-                        email: `${rollNo.replace(/\s+/g, '')}@university.edu`,
+                        email: `${rollNo.replace(/\s+/g, '')}@uog.edu.pk`,
                         password: defaultPassword,
                         phone: 12345678901,
                         role: 'student',
