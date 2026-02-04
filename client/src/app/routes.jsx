@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import StudentDashboard from '../pages/student/Dashboard';
 import ManagerDashboard from '../pages/manager/Dashboard';
@@ -17,7 +17,7 @@ import Settings from '../pages/misc/Settings';
 const router = createBrowserRouter([
     {
         path: '/auth', children: [
-            { index: true, element: <Login /> },
+            { index: true, element: <Navigate to={'/auth/login'} replace /> },
             { path: 'register', element: <Register /> },
             { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> }
