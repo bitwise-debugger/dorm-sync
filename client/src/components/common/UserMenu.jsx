@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 
 const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -38,14 +38,14 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
 
                 `}
             >
-                <Avatar name={userName} width={54} height={54} className="shadow-none border-none hover:translate-y-0" />
+                <Avatar name={user.name} width={54} height={54} className="shadow-none border-none hover:translate-y-0" />
 
                 <div className="hidden sm:block text-left mr-10">
                     <p className="text-md font-semibold text-slate-800 dark:text-white leading-tight">
-                        {userName}
+                        {user.name}
                     </p>
                     <p className="text-xs text-slate-700 dark:text-slate-400 capitalize tracking-wider font-normal">
-                        {userRole}
+                        {user.role}
                     </p>
                 </div>
 
@@ -59,8 +59,8 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
             {isOpen && (
                 <div className="absolute right-0 mt-3 w-56 py-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-2xl z-50 animate-in fade-in zoom-in duration-200">
                     <div className="px-4 py-2 border-b border-slate-50 dark:border-slate-800 mb-1 sm:hidden">
-                        <p className="text-sm font-bold text-slate-800 dark:text-white">{userName}</p>
-                        <p className="text-xs text-slate-500 uppercase">{userRole}</p>
+                        <p className="text-sm font-bold text-slate-800 dark:text-white">{user.name}</p>
+                        <p className="text-xs text-slate-500 uppercase">{user.role}</p>
                     </div>
 
                     <Link to={'/misc/profile'} className="flex items-center gap-3 w-full px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-orange-500 transition-colors">

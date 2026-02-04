@@ -1,22 +1,23 @@
-import React from 'react'
-import { useAuth } from './AuthContext';
-import { Outlet, useNavigate } from 'react-router-dom';
-import Loading from '../pages/utlility/Loading';
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+import Unauthorized from "../pages/utlility/Unauthorized";
+import Loading from "./../pages/utlility/Loading";
 
-export default function RequireAuth() {
+export default function RequireAuth({ allowedRoles = [] }) {
     const { user, authLoading } = useAuth();
-    const navigate = useNavigate();
+    console.log(user);
+
     if (authLoading) {
         return <Loading />;
     }
 
     if (!user) {
-        console.log("AuthUser = Null -> Redirect to Login!");
-        navigate('/auth/login');
-    }
-    else {
-        return <Outlet />;
+        return <Navigate to="/auth/login" replace />;
     }
 
+    if (allowedRoles.length && !allowedRoles.includes(user.role)) {
+        return <Unauthorized />;
+    }
 
+    return <Outlet />;
 }
