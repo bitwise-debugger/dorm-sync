@@ -8,6 +8,10 @@ import Register from '../pages/auth/Register';
 import Login from '../pages/auth/Login';
 
 import NotFound from '../pages/utlility/NotFound';
+import DashboardLayout from '../layouts/dashboard/DashboardLayout';
+import RequireAuth from '../auth/RequireAuth';
+import Profile from '../pages/misc/Profile';
+import Settings from '../pages/misc/Settings';
 
 
 const router = createBrowserRouter([
@@ -20,26 +24,42 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/student',
+        path: '/',
+        element: <RequireAuth />,
         children: [
-            { path: 'dashboard', element: <StudentDashboard /> },
-            { path: '*', element: <NotFound /> }
+            {
+                path: '/student',
+                element: <DashboardLayout role='student' />,
+                children: [
+                    { path: 'dashboard', element: <StudentDashboard /> },
+                    { path: '*', element: <NotFound /> }
+                ]
+            },
+            {
+                path: '/manager',
+                element: <DashboardLayout role='manager' />,
+                children: [
+                    { path: 'dashboard', element: <ManagerDashboard /> },
+                    { path: '*', element: <NotFound /> }
+                ]
+            },
+            {
+                path: '/admin',
+                element: <DashboardLayout role='admin' />,
+                children: [
+                    { path: 'dashboard', element: <AdminDashboard /> },
+                    { path: '*', element: <NotFound /> }
+                ]
+            },
+            {
+                path: '/misc', children: [
+                    { path: 'profile', element: <Profile /> },
+                    { path: 'settings', element: <Settings /> }
+                ]
+            },
         ]
     },
-    {
-        path: '/manager',
-        children: [
-            { path: 'dashboard', element: <ManagerDashboard /> },
-            { path: '*', element: <NotFound /> }
-        ]
-    },
-    {
-        path: '/admin',
-        children: [
-            { path: 'dashboard', element: <AdminDashboard /> },
-            { path: '*', element: <NotFound /> }
-        ]
-    },
+
     { path: '*', element: <NotFound /> }
 ])
 
