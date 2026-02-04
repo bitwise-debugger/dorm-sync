@@ -6,6 +6,7 @@ import IconButton from '../../components/common/IconButton';
 import { Bell } from 'lucide-react';
 import Avatar from '../../components/common/Avatar';
 import UserMenu from '../../components/common/UserMenu';
+import Topbar from './TopBar';
 
 const DashboardLayout = ({ role = 'student', userName = 'User' }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -29,19 +30,7 @@ const DashboardLayout = ({ role = 'student', userName = 'User' }) => {
             {/* </div> */}
             <div className={`flex grow flex-col min-h-screen w-full transition-all duration-300 ease-in-out `}>
                 {/* Topbar */}
-                <header className="h-23 bg-slate-50 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 px-6 flex items-center justify-between">
-                    <h2 className="text-lg font-semibold text-slate-800 dark:text-white capitalize flex flex-col justify-start">
-                        <span className='text-xl'>Dashboard</span>
-                        <span className='text-sm text-gray-500'>23 December 2025</span>
-                    </h2>
-
-                    <div className="header-left flex items-center gap-5 ">
-                        <ThemeButton />
-                        <IconButton icon={Bell} badgeCount={3} />
-                        <UserMenu />
-                    </div>
-                </header>
-
+                <Topbar />
                 {/* Dynamic Page Content */}
                 <main className="p-6">
                     <div className="max-w-7xl mx-auto">
