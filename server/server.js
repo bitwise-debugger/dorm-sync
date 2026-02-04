@@ -4,6 +4,8 @@ import dotenv from './config/env.js';
 import app from './app.js';
 
 
+
+
 connectMongo().then(() => {
     app.listen(PORT, () => {
         console.log("Server started listening on port", PORT);
