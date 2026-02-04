@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
 /* * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 } */
+
+
 .roboto {
     font-family: 'Roboto', sans-serif;
 }

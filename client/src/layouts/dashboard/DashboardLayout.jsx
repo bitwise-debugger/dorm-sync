@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import { Outlet } from 'react-router-dom';
 import ThemeButton from '../../components/common/ThemeButton';
@@ -7,7 +7,8 @@ import { Bell } from 'lucide-react';
 import Avatar from '../../components/common/Avatar';
 import UserMenu from '../../components/common/UserMenu';
 
-const DashboardLayout = ({ children, role = 'student', userName = 'User' }) => {
+const DashboardLayout = ({ role = 'student', userName = 'User' }) => {
+    const [isCollapsed, setIsCollapsed] = useState(false);
     useEffect(() => {
         console.log("DashboardLayout Mounted!!");
 
@@ -17,13 +18,16 @@ const DashboardLayout = ({ children, role = 'student', userName = 'User' }) => {
     }, []);
     return (
         <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950 font-sans">
-            {/* Sidebar - Hidden on mobile, you'd add a toggle later */}
-            <div className="hidden lg:block fixed h-full inset-y-0 left-0">
-                <Sidebar role={role} />
+            {/* <div className="sidebar bg-red-100 w-70 h-screen"> */}
+            <div className="">
+                <Sidebar
+                    role={role}
+                    isCollapsed={isCollapsed}
+                    setIsCollapsed={setIsCollapsed}
+                />
             </div>
-
-            {/* Main Content Area */}
-            <div className="flex-1 lg:ml-64 flex flex-col">
+            {/* </div> */}
+            <div className={`flex grow flex-col min-h-screen w-full transition-all duration-300 ease-in-out `}>
                 {/* Topbar */}
                 <header className="h-23 bg-slate-50 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 px-6 flex items-center justify-between">
                     <h2 className="text-lg font-semibold text-slate-800 dark:text-white capitalize flex flex-col justify-start">
@@ -33,7 +37,7 @@ const DashboardLayout = ({ children, role = 'student', userName = 'User' }) => {
 
                     <div className="header-left flex items-center gap-5 ">
                         <ThemeButton />
-                        < IconButton icon={Bell} badgeCount={3} />
+                        <IconButton icon={Bell} badgeCount={3} />
                         <UserMenu />
                     </div>
                 </header>
@@ -44,6 +48,8 @@ const DashboardLayout = ({ children, role = 'student', userName = 'User' }) => {
                         <Outlet />
                     </div>
                 </main>
+                {/* Space for Mobile Dock if you use it */}
+                <div className="h-24 sm:hidden" />
             </div>
         </div>
     );
