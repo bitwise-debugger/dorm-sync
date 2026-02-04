@@ -4,6 +4,7 @@ import ThemeButton from '../../components/common/ThemeButton';
 import IconButton from '../../components/common/IconButton';
 import UserMenu from '../../components/common/UserMenu';
 import NotificationDropdown from './NotificationDropdown';
+import { Link } from 'react-router-dom';
 
 const Topbar = ({ userName = "Mithun Ray" }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -98,14 +99,14 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
                                 </div>
 
                                 <div className="space-y-1">
-                                    <button className="flex items-center gap-3 w-full p-3 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors">
+                                    <Link to={'/misc/profile'} className="flex items-center gap-3 w-full p-3 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors">
                                         <User size={20} />
                                         <span className="font-semibold text-sm">Profile</span>
-                                    </button>
-                                    <button className="flex items-center gap-3 w-full p-3 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors">
+                                    </Link>
+                                    <Link to={'/misc/settings'} className="flex items-center gap-3 w-full p-3 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors">
                                         <Settings size={20} />
-                                        <span className="font-semibold text-sm">Account Settings</span>
-                                    </button>
+                                        <span className="font-semibold text-sm">Settings</span>
+                                    </Link>
                                     <button className="flex items-center gap-3 w-full p-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-colors">
                                         <LogOut size={20} />
                                         <span className="font-semibold text-sm">Logout</span>

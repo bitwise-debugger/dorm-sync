@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { User, LogOut, ChevronDown, Settings } from 'lucide-react';
 import Avatar from './Avatar';
+import { Link } from 'react-router-dom';
 
 const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +37,7 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
                 `}
             >
                 <Avatar name={userName} width={54} height={54} className="shadow-none border-none hover:translate-y-0" />
-                
+
                 <div className="hidden sm:block text-left mr-10">
                     <p className="text-md font-semibold text-slate-800 dark:text-white leading-tight">
                         {userName}
@@ -46,9 +47,9 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
                     </p>
                 </div>
 
-                <ChevronDown 
-                    size={16} 
-                    className={`text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+                <ChevronDown
+                    size={16}
+                    className={`text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
                 />
             </button>
 
@@ -60,15 +61,15 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
                         <p className="text-xs text-slate-500 uppercase">{userRole}</p>
                     </div>
 
-                    <button className="flex items-center gap-3 w-full px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-orange-500 transition-colors">
+                    <Link to={'/misc/profile'} className="flex items-center gap-3 w-full px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-orange-500 transition-colors">
                         <User size={18} strokeWidth={1.5} />
-                        <span className="text-sm font-medium">Edit Profile</span>
-                    </button>
+                        <span className="text-sm font-medium">Profile</span>
+                    </Link>
 
-                    <button className="flex items-center gap-3 w-full px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-orange-500 transition-colors">
+                    <Link to={'/misc/settings'} className="flex items-center gap-3 w-full px-4 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-orange-500 transition-colors">
                         <Settings size={18} strokeWidth={1.5} />
-                        <span className="text-sm font-medium">Account Settings</span>
-                    </button>
+                        <span className="text-sm font-medium">Settings</span>
+                    </Link>
 
                     <div className="h-px bg-slate-100 dark:bg-slate-800 my-1 mx-2" />
 

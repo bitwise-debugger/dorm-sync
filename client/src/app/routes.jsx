@@ -10,6 +10,8 @@ import Login from '../pages/auth/Login';
 import NotFound from '../pages/utlility/NotFound';
 import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 import RequireAuth from '../auth/RequireAuth';
+import Profile from '../pages/misc/Profile';
+import Settings from '../pages/misc/Settings';
 
 
 const router = createBrowserRouter([
@@ -47,6 +49,12 @@ const router = createBrowserRouter([
                 children: [
                     { path: 'dashboard', element: <AdminDashboard /> },
                     { path: '*', element: <NotFound /> }
+                ]
+            },
+            {
+                path: '/misc', children: [
+                    { path: 'profile', element: <Profile /> },
+                    { path: 'settings', element: <Settings /> }
                 ]
             },
         ]
