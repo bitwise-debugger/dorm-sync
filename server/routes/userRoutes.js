@@ -14,7 +14,7 @@ router.get('/:email', async (req, res) => {
         }
 
         const user = await User.findOne({ email })
-            .select('_id')
+            .select('_id name')
             .lean();
 
         if (!user) {
@@ -24,7 +24,8 @@ router.get('/:email', async (req, res) => {
         }
 
         return res.status(200).json({
-            id: user._id
+            id: user._id,
+            name: user.name
         });
 
     } catch (error) {

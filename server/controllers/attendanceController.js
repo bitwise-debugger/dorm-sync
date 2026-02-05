@@ -46,7 +46,7 @@ export const markAttendance = async (req, res) => {
             meal: mealId,
             date
         });
-
+        await attendance.populate('student', 'id name')
         return res.status(201).json({
             message: 'Attendance marked successfully',
             attendance
