@@ -5,7 +5,7 @@ import Loading from "./../pages/utlility/Loading";
 
 export default function RequireAuth({ allowedRoles = [] }) {
     const { user, authLoading } = useAuth();
-    console.log(user);
+    // console.log(user);
 
     if (authLoading) {
         return <Loading />;

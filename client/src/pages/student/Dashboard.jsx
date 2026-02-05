@@ -1,15 +1,18 @@
 import React from 'react';
 import {
   Utensils, Calendar, Clock, TrendingUp,
-  ChevronRight, Bell, CheckCircle2, AlertCircle
+  ChevronRight, Bell, CheckCircle2, AlertCircle,
+  Wallet, PieChart
 } from 'lucide-react';
+import { useAuth } from '../../auth/AuthContext';
 
 const Dashboard = () => {
-  // Context-grounded mock data
+  const {user} = useAuth();
+  // Data grounded in your student profile and hostel context
   const stats = [
-    { label: 'Mess Status', value: 'Open', status: 'active', icon: Utensils, color: 'text-orange-500', bg: 'bg-orange-50 dark:bg-orange-500/10' },
-    { label: 'Attendance', value: '92%', status: 'good', icon: CheckCircle2, color: 'text-green-500', bg: 'bg-green-50 dark:bg-green-500/10' },
-    { label: 'Total Bills', value: 'PKR 4,200', status: 'pending', icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-500/10' },
+    { label: 'Mess Status', value: 'Closed', icon: Utensils, color: 'text-orange-500', bg: 'bg-orange-50', isLive: true },
+    { label: 'Monthly Attendance', value: '24 / 30', icon: CheckCircle2, color: 'text-green-500', bg: 'bg-green-50'},
+    { label: 'Current Bill', value: 'PKR 4,200', icon: Wallet, color: 'text-blue-500', bg: 'bg-blue-50' },
   ];
 
   const todayMenu = [
@@ -19,117 +22,127 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-6 poppins animate-in fade-in duration-500">
-      {/* Top Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="space-y-10 poppins animate-in fade-in duration-700 pb-12">
+
+      {/* High-Elevation Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {stats.map((stat, idx) => (
-          <div key={idx} className="bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
-                <stat.icon size={24} />
+          <div
+            key={idx}
+            className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] shadow-2xl shadow-slate-200/50 dark:shadow-none flex items-center justify-between transition-transform hover:-translate-y-1 duration-300"
+          >
+            <div className="flex items-center gap-5">
+              <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} dark:bg-slate-800`}>
+                <stat.icon size={28} strokeWidth={2.5} />
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">{stat.label}</p>
-                <h3 className="text-xl font-black text-slate-800 dark:text-white leading-none">{stat.value}</h3>
+                <p className="text-[11px] font-black text-slate-400 uppercase tracking-[2px] mb-1">{stat.label}</p>
+                <h3 className="text-2xl font-black text-slate-800 dark:text-white leading-none">{stat.value}</h3>
               </div>
             </div>
-            {stat.label === 'Mess Status' && (
-              <div className="flex items-center gap-1.5 px-2 py-1 bg-green-500/10 text-green-600 rounded-full">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[10px] font-bold">LIVE</span>
+            {stat.isLive && (
+              <div className="flex items-center gap-1.5 px-3 py-1 bg-green-500/10 text-green-600 rounded-full ring-1 ring-green-500/20">
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[10px] font-black tracking-tighter">LIVE</span>
               </div>
             )}
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Middle Content: Attendance Report (Academix Chart Style) */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        {/* Attendance Visualizer (Academix Style) */}
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 dark:shadow-none">
+          <div className="flex items-center justify-between mb-12">
             <div>
-              <h3 className="font-bold text-slate-800 dark:text-white">Monthly Attendance Report</h3>
-              <p className="text-xs text-slate-500">Visualization of your mess presence this month.</p>
+              <h3 className="text-xl font-black text-slate-800 dark:text-white">Attendance Analytics</h3>
+              <p className="text-sm font-medium text-slate-500 mt-1">Daily presence overview for February 2026</p>
             </div>
-            <select className="text-xs font-bold bg-slate-50 dark:bg-slate-800 border-none rounded-lg p-2 outline-none cursor-pointer">
-              <option>February 2026</option>
-              <option>January 2026</option>
-            </select>
+            <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl text-slate-400">
+              <PieChart size={24} />
+            </div>
           </div>
 
-          {/* Placeholder for Chart - Matches Academix Visuals */}
-          <div className="h-64 w-full bg-slate-50 dark:bg-slate-800/20 rounded-xl border border-dashed border-slate-200 dark:border-slate-700 flex items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-20 flex items-end justify-around px-4">
-              {[40, 70, 45, 90, 65, 80, 50].map((h, i) => (
-                <div key={i} style={{ height: `${h}%` }} className="w-8 bg-gradient-to-t from-orange-500 to-orange-300 rounded-t-lg" />
-              ))}
-            </div>
-            <span className="text-sm font-bold text-slate-400 z-10 bg-white dark:bg-slate-900 px-4 py-2 rounded-full shadow-sm">
-              Attendance Chart Container
-            </span>
+          <div className="h-72 w-full bg-slate-50/50 dark:bg-slate-800/20 rounded-[2rem] flex items-end justify-around px-8 pb-6 relative overflow-hidden group">
+            {/* Visualizing smooth peaks like your reference */}
+            {[45, 85, 55, 95, 70, 90, 60].map((h, i) => (
+              <div key={i} className="flex flex-col items-center gap-4 z-10">
+                <div style={{ height: `${h}%` }} className="w-2 sm:w-3 bg-orange-500/20 rounded-full relative overflow-hidden group/bar cursor-pointer">
+                  <div className="absolute bottom-0 w-full bg-gradient-to-t from-orange-600 to-orange-400 rounded-full h-full scale-y-0 group-hover/bar:scale-y-100 transition-transform duration-500 origin-bottom" />
+                  <div className="absolute bottom-0 w-full bg-orange-500/40 rounded-full h-1/2 animate-pulse" />
+                </div>
+                <span className="text-[10px] font-black text-slate-400">DAY {i + 1}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Right Column: Today's Menu */}
-        <div className="lg:col-span-1 bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="font-bold text-slate-800 dark:text-white">Today's Menu</h3>
-            <Utensils size={18} className="text-orange-500" />
+        {/* Dynamic Menu Card */}
+        <div className="lg:col-span-1 bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 dark:shadow-none">
+          <div className="flex items-center justify-between mb-10">
+            <h3 className="text-xl font-black text-slate-800 dark:text-white">Today's Meal</h3>
+            <div className="w-12 h-12 bg-orange-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/40">
+              <Utensils size={24} />
+            </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {todayMenu.map((item, idx) => (
-              <div key={idx} className={`p-4 rounded-xl border transition-all ${item.active ? 'bg-orange-500/5 border-orange-200 dark:border-orange-500/20' : 'bg-slate-50 dark:bg-slate-800/30 border-transparent'}`}>
-                <div className="flex justify-between items-start mb-1">
-                  <span className={`text-[10px] font-black uppercase tracking-widest ${item.active ? 'text-orange-600' : 'text-slate-400'}`}>
+              <div
+                key={idx}
+                className={`p-6 rounded-3xl transition-all duration-300 ${item.active
+                  ? 'bg-orange-500 text-white shadow-2xl shadow-orange-500/30 scale-105'
+                  : 'bg-slate-50 dark:bg-slate-800/50 text-slate-500'}`}
+              >
+                <div className="flex justify-between items-start mb-2">
+                  <span className={`text-[10px] font-black uppercase tracking-[2px] ${item.active ? 'text-orange-100' : 'text-slate-400'}`}>
                     {item.meal}
                   </span>
-                  <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1">
-                    <Clock size={10} /> {item.time}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <Clock size={12} strokeWidth={3} />
+                    <span className="text-[11px] font-black">{item.time}</span>
+                  </div>
                 </div>
-                <p className={`text-sm font-bold ${item.active ? 'text-slate-900 dark:text-white' : 'text-slate-500'}`}>
+                <p className={`text-base font-bold ${item.active ? 'text-white' : 'text-slate-800 dark:text-slate-200'}`}>
                   {item.menu}
                 </p>
               </div>
             ))}
           </div>
-
-          <button className="w-full mt-6 py-3 text-xs font-bold text-orange-600 bg-orange-50 dark:bg-orange-500/10 rounded-xl hover:bg-orange-100 dark:hover:bg-orange-500/20 transition-colors">
-            View Weekly Schedule
-          </button>
         </div>
       </div>
 
-      {/* Bottom Row: Recent Notifications */}
-      <div className="bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="font-bold text-slate-800 dark:text-white">Quick Updates</h3>
-          <button className="text-xs font-bold text-slate-400 hover:text-orange-500 flex items-center gap-1">
-            View All <ChevronRight size={14} />
+      {/* 
+      // Quick Updates Footer Section
+      <div className="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 dark:shadow-none">
+        <div className="flex items-center justify-between mb-8">
+          <h3 className="text-xl font-black text-slate-800 dark:text-white">Important Notices</h3>
+          <button className="text-xs font-black text-orange-600 bg-orange-50 px-4 py-2 rounded-xl hover:bg-orange-100 transition-colors">
+            HISTORY
           </button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/30">
-            <div className="p-2 bg-blue-500/10 text-blue-600 rounded-lg">
-              <AlertCircle size={18} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex items-center gap-5 p-6 bg-slate-50 dark:bg-slate-800/40 rounded-3xl">
+            <div className="p-3 bg-blue-500/10 text-blue-600 rounded-2xl">
+              <AlertCircle size={24} />
             </div>
             <div>
-              <p className="text-sm font-bold text-slate-800 dark:text-white">Gate Pass Reminder</p>
-              <p className="text-xs text-slate-500">Ensure your gate pass is updated for the upcoming weekend leave.</p>
+                <p className="text-sm font-bold text-slate-800 dark:text-white">Gate Pass Required</p>
+                <p className="text-xs text-slate-500 font-medium">Updated security protocols for weekend leave.</p>
             </div>
           </div>
-          <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/30">
-            <div className="p-2 bg-orange-500/10 text-orange-600 rounded-lg">
-              <Bell size={18} />
+          <div className="flex items-center gap-5 p-6 bg-slate-50 dark:bg-slate-800/40 rounded-3xl">
+            <div className="p-3 bg-orange-500/10 text-orange-600 rounded-2xl">
+              <Bell size={24} />
             </div>
             <div>
-              <p className="text-sm font-bold text-slate-800 dark:text-white">Mess Survey</p>
-              <p className="text-xs text-slate-500">Please provide feedback on the new breakfast menu by Friday.</p>
+                <p className="text-sm font-bold text-slate-800 dark:text-white">Mess Survey 2026</p>
+                <p className="text-xs text-slate-500 font-medium">Share your feedback on the new UOG menu.</p>
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

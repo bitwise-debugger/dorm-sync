@@ -1,22 +1,36 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import api from "../services/api";
+import { showToast } from "../pages/utlility/CustomToast";
+import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 
 export function AuthContextProvider({ children }) {
     const [authLoading, setAuthLoading] = useState(true);
-    const [user, setUser] = useState(() => {
-        const localUser = localStorage.getItem('dormsyncuser');
-        if (localUser) return JSON.parse(localUser);
-        else return null;
-    });
+    const [user, setUser] = useState();
 
     useEffect(() => {
         console.log("AuthContextProvider Mounted!!");
+        const localUser = localStorage.getItem('dormsynctoken');
+        if (localUser) {
+            console.log("There's something");
+            api.get('/auth/me').then((res) => {
+                setUser(res.data);
+            }).catch((err) => {
+                console.log(err.message);
+                showToast('error', "Login Session Ended", "Please login again!");
+                localStorage.removeItem('dormsyncuser');
+                setUser(null);
+            }).finally(() => {
+                setAuthLoading(false);
+            })
+        } else {
+            console.log("Nothing!");
+        }
     }, []);
     useEffect(() => {
         console.log("User State Changed ", user);
-        setAuthLoading(false);
     }, [user]);
 
 
@@ -24,7 +38,6 @@ export function AuthContextProvider({ children }) {
         setAuthLoading(true);
         setTimeout(() => {
             localStorage.removeItem('dormsyncuser');
-            localStorage.removeItem('dormsynctoken');
             setUser(null);
         }, 500);
     }

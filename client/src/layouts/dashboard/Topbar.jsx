@@ -6,8 +6,9 @@ import UserMenu from '../../components/common/UserMenu';
 import NotificationDropdown from './NotificationDropdown';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
+import moment from 'moment';
 
-const Topbar = ({ userName = "Mithun Ray" }) => {
+const Topbar = () => {
     const { logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isNotifOpen, setIsNotifOpen] = useState(false);
@@ -56,7 +57,7 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
                     Student Dashboard
                 </h2>
                 <span className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5">
-                    Wednesday, 04 February 2026
+                    {moment(moment.now()).format('LLL')}
                 </span>
             </div>
 
@@ -79,7 +80,7 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
                 {/* Desktop Actions: Hidden below 'md' */}
                 <div className="hidden lg:flex items-center gap-4">
                     <ThemeButton />
-                    <UserMenu userName={userName} />
+                    <UserMenu/>
                 </div>
 
                 {/* Mobile More Menu Toggle with Outside Click Logic */}

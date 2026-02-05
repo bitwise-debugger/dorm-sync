@@ -4,7 +4,7 @@ import Avatar from './Avatar';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 
-const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
+const UserMenu = () => {
     const { logout, user } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
@@ -38,7 +38,7 @@ const UserMenu = ({ userName = "Mithun Ray", userRole = "Student" }) => {
 
                 `}
             >
-                <Avatar name={user.name} width={54} height={54} className="shadow-none border-none hover:translate-y-0" />
+                <Avatar src={user.profilePicture} name={user.name} width={54} height={54} className="shadow-none border-none hover:translate-y-0" />
 
                 <div className="hidden sm:block text-left mr-10">
                     <p className="text-md font-semibold text-slate-800 dark:text-white leading-tight">

@@ -39,13 +39,11 @@ const Login = () => {
 
             const { token, role, name } = response.data;
 
-            // 1. Save auth data
+
             localStorage.setItem('dormsynctoken', token);
-            localStorage.setItem('dormsyncuser', JSON.stringify(response.data));
             setUser(response.data);
             showToast('success', 'Login Successful', `Welcome to the portal, ${name}!`);
 
-            // 2. Role-based Redirection
             if (role === 'admin') navigate('/admin/dashboard');
             else if (role === 'manager') navigate('/manager/dashboard');
             else navigate('/student/dashboard');
