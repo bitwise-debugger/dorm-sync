@@ -30,7 +30,7 @@ const DashboardLayout = ({ role = 'student', userName = 'User' }) => {
             {/* </div> */}
             <div className={`flex grow flex-col min-h-screen w-full transition-all duration-300 ease-in-out `}>
                 {/* Topbar */}
-                <Topbar />
+                <Topbar role={role} />
                 {/* Dynamic Page Content */}
                 <main className="p-6">
                     <div className="max-w-7xl mx-auto">

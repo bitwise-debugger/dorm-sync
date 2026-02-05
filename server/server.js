@@ -2,6 +2,7 @@ const PORT = process.env.PORT;
 import { connectMongo } from './config/db.js';
 import dotenv from './config/env.js';
 import app from './app.js';
+import Meal from './models/Meal.js';
 
 
 connectMongo().then(() => {

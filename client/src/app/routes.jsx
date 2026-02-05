@@ -13,6 +13,8 @@ import RequireAuth from "../auth/RequireAuth";
 import Profile from "../pages/misc/Profile";
 import Settings from "../pages/misc/Settings";
 import HomeRoute from "../pages/utlility/HomeRoute";
+import MarkAttendance from "../pages/manager/MarkAttendance";
+import Meals from "../pages/manager/Meals";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +38,7 @@ const router = createBrowserRouter([
         element: <RequireAuth allowedRoles={["student"]} />,
         children: [
             {
-                element: <DashboardLayout />, children: [
+                element: <DashboardLayout role="student" />, children: [
                     { index: true, element: <Navigate to="/student/dashboard" replace /> },
                     { path: "dashboard", element: <StudentDashboard /> },
                     { path: "*", element: <NotFound /> },
@@ -51,9 +53,11 @@ const router = createBrowserRouter([
         element: <RequireAuth allowedRoles={["manager"]} />,
         children: [
             {
-                element: <DashboardLayout />, children: [
+                element: <DashboardLayout role="manager" />, children: [
                     { index: true, element: <Navigate to="/manager/dashboard" replace /> },
                     { path: "dashboard", element: <ManagerDashboard /> },
+                    { path: "attendance", element: <MarkAttendance /> },
+                    { path: "meals", element: <Meals /> },
                     { path: "*", element: <NotFound /> },
                 ]
             },
@@ -66,7 +70,7 @@ const router = createBrowserRouter([
         element: <RequireAuth allowedRoles={["admin"]} />,
         children: [
             {
-                element: <DashboardLayout />, children: [
+                element: <DashboardLayout role="admin" />, children: [
                     { index: true, element: <Navigate to="/admin/dashboard" replace /> },
                     { path: "dashboard", element: <AdminDashboard /> },
                     { path: "*", element: <NotFound /> },

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 import moment from 'moment';
 
-const Topbar = () => {
+const Topbar = ({ role = 'student' }) => {
     const { logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isNotifOpen, setIsNotifOpen] = useState(false);
@@ -46,7 +46,7 @@ const Topbar = () => {
                         DORM<span className="text-orange-500">SYNC</span>
                     </h1>
                     <span className="text-[10px] font-bold text-orange-500/80 uppercase tracking-[1.2px] mt-1 poppins">
-                        Student Dashboard
+                        {role[0].toUpperCase() + role.slice(1)} Dashboard
                     </span>
                 </div>
             </div>
@@ -54,7 +54,7 @@ const Topbar = () => {
             {/* Left: Dashboard Title (Visible above 'md') */}
             <div className="hidden md:flex flex-col justify-center">
                 <h2 className="text-xl font-bold text-slate-800 dark:text-white leading-tight">
-                    Student Dashboard
+                    {role[0].toUpperCase() + role.slice(1)} Dashboard
                 </h2>
                 <span className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5">
                     {moment(moment.now()).format('LLL')}
@@ -80,7 +80,7 @@ const Topbar = () => {
                 {/* Desktop Actions: Hidden below 'md' */}
                 <div className="hidden lg:flex items-center gap-4">
                     <ThemeButton />
-                    <UserMenu/>
+                    <UserMenu />
                 </div>
 
                 {/* Mobile More Menu Toggle with Outside Click Logic */}
