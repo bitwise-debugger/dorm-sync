@@ -20,13 +20,14 @@ export function AuthContextProvider({ children }) {
             }).catch((err) => {
                 console.log(err.message);
                 showToast('error', "Login Session Ended", "Please login again!");
-                localStorage.removeItem('dormsyncuser');
+                localStorage.removeItem('dormsynctoken');
                 setUser(null);
             }).finally(() => {
                 setAuthLoading(false);
             })
         } else {
             console.log("Nothing!");
+            setAuthLoading(false);
         }
     }, []);
     useEffect(() => {
@@ -37,8 +38,9 @@ export function AuthContextProvider({ children }) {
     function logout() {
         setAuthLoading(true);
         setTimeout(() => {
-            localStorage.removeItem('dormsyncuser');
+            localStorage.removeItem('dormsynctoken');
             setUser(null);
+            setAuthLoading(false);
         }, 500);
     }
     const value = { user, authLoading, setUser, setAuthLoading, logout };
