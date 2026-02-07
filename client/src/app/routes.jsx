@@ -15,6 +15,7 @@ import Settings from "../pages/misc/Settings";
 import HomeRoute from "../pages/utlility/HomeRoute";
 import MarkAttendance from "../pages/manager/MarkAttendance";
 import Meals from "../pages/manager/Meals";
+import MessAttendance from "../pages/student/MessAttendance";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
                 element: <DashboardLayout role="student" />, children: [
                     { index: true, element: <Navigate to="/student/dashboard" replace /> },
                     { path: "dashboard", element: <StudentDashboard /> },
+                    { path: "attendance", element: <MessAttendance /> },
                     { path: "*", element: <NotFound /> },
                 ]
             },

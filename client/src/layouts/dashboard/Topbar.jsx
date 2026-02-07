@@ -35,7 +35,7 @@ const Topbar = ({ role = 'student' }) => {
     }, []);
 
     return (
-        <header className="h-20 poppins sm:h-24 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 px-2 sm:px-6 flex items-center justify-between transition-all poppins">
+        <header className="h-20 poppins sm:h-24 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 px-2 sm:px-6 py-3 flex items-center justify-between transition-all poppins">
 
             {/* Left: Branding (Visible below 'md' breakpoint) */}
             <div className="flex items-center gap-2 md:hidden animate-in fade-in duration-500">
