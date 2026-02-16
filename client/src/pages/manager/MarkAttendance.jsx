@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import {
-    Fingerprint, Clock, CheckCircle2, UserCheck, 
-    Loader2, Zap, ZapOff, ChevronDown, 
+    Fingerprint, Clock, CheckCircle2, UserCheck,
+    Loader2, Zap, ZapOff, ChevronDown,
     CalendarDays, Utensils
 } from 'lucide-react';
 
@@ -83,7 +83,7 @@ const MarkAttendance = () => {
             });
 
             showToast('success', 'Entry Recorded', `${student.name} verified for ${activeMeal.mealType}`);
-            
+
             // Add to live feed
             setRecentAttendance(prev => [response.data.attendance, ...prev].slice(0, 15));
             setQuery('');
@@ -128,7 +128,7 @@ const MarkAttendance = () => {
                         <div className="flex-1 flex items-center gap-3 animate-in zoom-in-95 duration-300">
                             <div className="relative flex-1">
                                 <Utensils className="absolute left-4 top-1/2 -translate-y-1/2 text-orange-500/50" size={16} />
-                                <select 
+                                <select
                                     value={manualMealId}
                                     onChange={(e) => setManualMealId(e.target.value)}
                                     className="w-full pl-12 pr-10 py-3 bg-slate-800 border-none rounded-xl text-white text-[11px] font-bold appearance-none outline-none focus:ring-2 focus:ring-orange-500"
@@ -200,8 +200,8 @@ const MarkAttendance = () => {
                                     placeholder={activeMeal ? "Enter Student ID (e.g. 23021...)" : "SELECT MEAL ABOVE"}
                                     className={`w-full p-6 rounded-[2.5rem] text-center text-2xl font-black transition-all border-4 outline-none
                                     ${activeMeal
-                                        ? 'border-slate-50 focus:border-orange-600 bg-slate-50 focus:bg-white text-slate-800 dark:text-white dark:bg-slate-800'
-                                        : 'bg-slate-100 border-transparent cursor-not-allowed opacity-50'}`}
+                                            ? 'border-slate-50 focus:border-orange-600 bg-slate-50 focus:bg-white text-slate-800 dark:text-white dark:bg-slate-800'
+                                            : 'bg-slate-100 border-transparent cursor-not-allowed opacity-50'}`}
                                 />
 
                                 <button
@@ -209,8 +209,8 @@ const MarkAttendance = () => {
                                     disabled={!activeMeal || query.length < 5 || loading}
                                     className={`w-full flex items-center justify-center gap-3 py-6 rounded-[2.5rem] font-black text-sm uppercase tracking-[3px] transition-all
                                     ${(activeMeal && query.length >= 5)
-                                        ? 'bg-slate-900 text-white shadow-2xl hover:bg-black hover:-translate-y-1 cursor-pointer'
-                                        : 'bg-slate-100 text-slate-300 cursor-not-allowed'}`}
+                                            ? 'bg-slate-900 text-white shadow-2xl hover:bg-black hover:-translate-y-1 cursor-pointer'
+                                            : 'bg-slate-100 text-slate-300 cursor-not-allowed'}`}
                                 >
                                     {loading ? <Loader2 className="animate-spin" size={24} /> : <><CheckCircle2 size={22} /> Confirm Attendance</>}
                                 </button>
@@ -220,8 +220,8 @@ const MarkAttendance = () => {
                 </div>
 
                 {/* RIGHT: LIVE LOGS (STAY UNCHANGED) */}
-                <div className="xl:col-span-5">
-                    <div className="bg-white dark:bg-slate-900 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col h-[740px] overflow-hidden">
+                <div className="xl:col-span-5 ">
+                    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col h-[570px] overflow-hidden no-scrollbar">
                         <div className="p-8 border-b border-slate-50 dark:border-slate-800 flex justify-between items-center">
                             <div className="flex items-center gap-3">
                                 <UserCheck size={24} className="text-orange-500" />
@@ -230,7 +230,7 @@ const MarkAttendance = () => {
                             <div className="px-4 py-1.5 bg-green-50 dark:bg-green-900/20 text-green-600 text-[10px] font-black rounded-full animate-pulse">ACTIVE FEED</div>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto no-scrollbar p-6 space-y-6">
+                        <div className="flex-1 overflow-y-auto no-scrollbar p-6 space-y-6 slim-scroll">
                             {recentAttendance.length > 0 ? (
                                 Object.entries(
                                     recentAttendance.reduce((groups, log) => {
@@ -243,7 +243,7 @@ const MarkAttendance = () => {
                                     }, {})
                                 ).map(([date, logs]) => (
                                     <div key={date} className="space-y-4">
-                                        <div className="sticky top-0 z-10 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm flex items-center gap-4">
+                                        <div className="sticky top-0 z-10 py-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm flex items-center gap-4 drop-shadow-2xl rounded-full px-5">
                                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-[3px]">{date}</span>
                                             <div className="h-[1px] flex-1 bg-slate-100 dark:bg-slate-800"></div>
                                         </div>

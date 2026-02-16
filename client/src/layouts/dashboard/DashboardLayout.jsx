@@ -35,9 +35,9 @@ const DashboardLayout = ({ role = 'student', userName = 'User' }) => {
             <Topbar role={role} />
             {/* Dynamic Page Content */}
             <main className="p-6">
-                <div className="max-w-7xl mx-auto">
+                {/* <div className="max-w-7xl mx-auto"> */}
                     <Outlet />
-                </div>
+                {/* </div> */}
             </main>
             {/* Space for Mobile Dock if you use it */}
             <div className="h-24 sm:hidden" />
