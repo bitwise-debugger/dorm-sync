@@ -5,8 +5,11 @@ import IconButton from '../../components/common/IconButton';
 import UserMenu from '../../components/common/UserMenu';
 import NotificationDropdown from './NotificationDropdown';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../auth/AuthContext';
+import moment from 'moment';
 
-const Topbar = ({ userName = "Mithun Ray" }) => {
+const Topbar = ({ role = 'student' }) => {
+    const { logout } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isNotifOpen, setIsNotifOpen] = useState(false);
 
@@ -32,7 +35,7 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
     }, []);
 
     return (
-        <header className="h-20 poppins sm:h-24 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 px-2 sm:px-6 flex items-center justify-between transition-all poppins">
+        <header className="h-20 poppins sm:h-24 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 px-2 sm:px-6 py-3 flex items-center justify-between transition-all poppins">
 
             {/* Left: Branding (Visible below 'md' breakpoint) */}
             <div className="flex items-center gap-2 md:hidden animate-in fade-in duration-500">
@@ -43,7 +46,7 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
                         DORM<span className="text-orange-500">SYNC</span>
                     </h1>
                     <span className="text-[10px] font-bold text-orange-500/80 uppercase tracking-[1.2px] mt-1 poppins">
-                        Student Dashboard
+                        {role[0].toUpperCase() + role.slice(1)} Dashboard
                     </span>
                 </div>
             </div>
@@ -51,10 +54,10 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
             {/* Left: Dashboard Title (Visible above 'md') */}
             <div className="hidden md:flex flex-col justify-center">
                 <h2 className="text-xl font-bold text-slate-800 dark:text-white leading-tight">
-                    Dashboard
+                    {role[0].toUpperCase() + role.slice(1)} Dashboard
                 </h2>
                 <span className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-0.5">
-                    Wednesday, 04 February 2026
+                    {moment(moment.now()).format('LLL')}
                 </span>
             </div>
 
@@ -77,7 +80,7 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
                 {/* Desktop Actions: Hidden below 'md' */}
                 <div className="hidden lg:flex items-center gap-4">
                     <ThemeButton />
-                    <UserMenu userName={userName} />
+                    <UserMenu />
                 </div>
 
                 {/* Mobile More Menu Toggle with Outside Click Logic */}
@@ -107,7 +110,7 @@ const Topbar = ({ userName = "Mithun Ray" }) => {
                                         <Settings size={20} />
                                         <span className="font-semibold text-sm">Settings</span>
                                     </Link>
-                                    <button className="flex items-center gap-3 w-full p-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-colors">
+                                    <button onClick={logout} className="flex items-center gap-3 w-full p-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-colors">
                                         <LogOut size={20} />
                                         <span className="font-semibold text-sm">Logout</span>
                                     </button>

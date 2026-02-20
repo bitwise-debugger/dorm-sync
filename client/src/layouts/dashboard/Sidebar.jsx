@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { LayoutDashboard, Utensils, ClipboardCheck, FileText, Settings, Users, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, Utensils, ClipboardCheck, FileText, Settings, Users, ChevronLeft, ChevronRight, HandPlatter } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({ role }) => {
@@ -21,6 +21,7 @@ const Sidebar = ({ role }) => {
         ],
         manager: [
             { name: 'Dashboard', icon: LayoutDashboard, path: '/manager/dashboard' },
+            { name: 'Meals', icon: HandPlatter, path: '/manager/meals' },
             { name: 'Mark Attendance', icon: ClipboardCheck, path: '/manager/attendance' },
             { name: 'Live Mess', icon: Utensils, path: '/manager/mess' },
         ],
